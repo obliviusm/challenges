@@ -42,8 +42,21 @@ module ReinforcesMassacre
     [battlefield, reinforces]
   end
 
+  def self.normalize_airstrike(size, airstrike)
+    field = ' ' * size
+    airstrike.split('').each_with_index { |place, index| field[index] = place }
+    field
+  end
+
   def self.alphabet_war(reinforces, airstrikes)
-    self.do_airstrike(reinforces[0], airstrikes[0])
+    battlefield = reinforces.delete_at(0)
+    i = 0
+    airstrikes.each do |airstrike|
+      airstrike = self.normalize_airstrike(battlefield.size, airstrike)
+      battlefield = self.do_airstrike(battlefield, airstrike)
+      battlefield, reinforces = self.get_reinforces(battlefield, reinforces)
+    end
+    battlefield
   end
 end
 

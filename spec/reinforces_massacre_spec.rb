@@ -1,6 +1,43 @@
 require_relative '../reinforces_massacre.rb';
 
 RSpec.describe ReinforcesMassacre do
+  context '.alphabet_war' do
+    it 'small war' do
+      reinforces = ["abcdefg", "hijklmn"];
+      airstrikes = ["   *   ", "*  *   "];
+      battlefield = subject.alphabet_war(reinforces, airstrikes)
+      expect(battlefield).to eq "hi___fg"
+    end
+
+    it 'big war' do
+      reinforces = [
+        "g964xxxxxxxx",
+        "myjinxin2015",
+        "steffenvogel",
+        "smile67xxxxx",
+        "giacomosorbi",
+        "freywarxxxxx",
+        "bkaesxxxxxxx",
+        "vadimbxxxxxx",
+        "zozofouchtra",
+        "colbydauphxx"
+      ]
+      airstrikes = [
+        "* *** ** ***",
+        " ** * * * **",
+        " * *** * ***",
+        " **  * * ** ",
+        "* ** *   ***",
+        "***   ",
+        "**",
+        "*",
+        "*"
+      ]
+      battlefield = subject.alphabet_war(reinforces, airstrikes)
+      expect(battlefield).to eq "codewarsxxxx"
+    end
+  end
+
   context '.get_reinforces to buttlefield' do
     it 'from first line' do
       reinforces = ["h__kl_n", "op_stuv"]
