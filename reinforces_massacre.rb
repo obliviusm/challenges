@@ -4,7 +4,7 @@ module ReinforcesMassacre
   def self.get_kill_zone(airstrike)
     kill_zone = ' ' * airstrike.size
     airstrike.split('').each_with_index do |place, index|
-      next unless place == '*'
+      next if place != '*'
 
       kill_zone[index - 1] = '_' if index - 1 >= 0
       kill_zone[index + 1] = '_' if index + 1 < kill_zone.size
@@ -20,6 +20,26 @@ module ReinforcesMassacre
       new_battlefield[index] = kill_zone[index] == '_' ? '_' : place
     end
     new_battlefield
+  end
+
+  def self.get_place_reinforces(index, reinforces)
+    place = '_'
+    reinforces.each_with_index do |reinforce, reinforce_index|
+      next if reinforce[index] == '_'
+
+      place = reinforce[index]
+      reinforces[reinforce_index][index] = '_'
+      break
+    end
+    [place, reinforces]
+  end
+
+  def self.get_reinforces(battlefield, reinforces)
+    (0...battlefield.size).to_a.each do |index|
+      next if battlefield[index] != '_'
+      battlefield[index], reinforces = get_place_reinforces(index, reinforces)
+    end
+    [battlefield, reinforces]
   end
 
   def self.alphabet_war(reinforces, airstrikes)
