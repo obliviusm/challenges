@@ -50,7 +50,6 @@ module ReinforcesMassacre
 
   def self.alphabet_war(reinforces, airstrikes)
     battlefield = reinforces.delete_at(0)
-    i = 0
     airstrikes.each do |airstrike|
       airstrike = self.normalize_airstrike(battlefield.size, airstrike)
       battlefield = self.do_airstrike(battlefield, airstrike)
@@ -60,16 +59,3 @@ module ReinforcesMassacre
   end
 end
 
-# reinforces = ["abcdefg", "hijklmn"];
-# airstrikes = ["   *   ", "*  *   "];
-
-# alphabetWar(reinforces, airstrikes)
-
-# The battlefield  is     : "abcedfg".
-# The first airstrike    : "   *   "
-# After first airstrike  : "ab___fg"
-# Reinforces are comming : "abjklfg"
-# The second airstrike   : "*  *   "
-# After second airstrike : "_____fg"
-# Reinforces are coming  : "hi___fg"
-# No more airstrikes => return "hi___fg"
