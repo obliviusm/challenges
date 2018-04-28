@@ -1,6 +1,15 @@
 require_relative '../reinforces_massacre.rb';
 
 RSpec.describe ReinforcesMassacre do
+  context '.get_reinforces to buttlefield' do
+    it 'from first line' do
+      reinforces = ["h__kl_n", "op_stuv"]
+      battlefield, reinforces = subject.get_reinforces("a___efg", reinforces)
+      expect(battlefield).to eq "ap_kefg"
+      expect(reinforces).to eq ["h___l_n", "o__stuv"]
+    end
+  end
+
   context '.get_place_reinforces to one spot' do
     it 'from first line' do
       reinforces = ["hijklmn", "abcdefg"]
